@@ -1,22 +1,22 @@
 const router = require("express").Router();
 const auth = require("./../middleware/auth");
 
-const Event = require("../models/eventModel");
+const Note = require("../models/noteModel");
 
 router.get("/", auth, async (req, res) => {
   try {
-    const events = await Event.find({});
+    const notes = await Note.find({});
     const { user } = req;
-    res.status(200).json({ events });
+    res.status(200).json({ notes });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-router.get("/myevents", auth, async (req, res) => {
+router.get("/mynotes", auth, async (req, res) => {
   try {
     const { user } = req;
-    const events = await Event.find({ host: user });
-    res.status(200).json({ events, user });
+    const notes = await Note.find({ host: user });
+    res.status(200).json({ notes, user });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -28,19 +28,18 @@ router.post("/new", auth, async (req, res) => {
     const host = req.user;
     console.log(req.user);
 
-    const newEvent = new Event({
-      venue,
+    const newNote = new Note({
       date,
-      title,
+      text,
       host,
       name,
     });
-    const savedEvent = await newEvent.save();
-    Event.findOne({ host: host })
+    const savedNote = await newNote.save();
+    Note.findOne({ host: host })
       .populate("host")
       .exec((err, eve) => {
         if (err) return res.status(500).json(eve);
-        res.json({ savedEvent, displayName: eve.host.displayName });
+        res.json({ savedNote, displayName: eve.host.displayName });
       });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -49,8 +48,8 @@ router.post("/new", auth, async (req, res) => {
 router.delete("/delete", auth, async (req, res) => {
   try {
     console.log(req.body);
-    const deletedEvent = await Event.findByIdAndDelete(req.body.eventId);
-    res.json(deletedEvent);
+    const deletedNote = await Note.findByIdAndDelete(req.body.noteId);
+    res.json(deletedNote);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

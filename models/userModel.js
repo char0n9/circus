@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true, minlength: 5 },
   displayName: { type: String },
   events: [{ type: mongoose.Schema.Types.ObjectId, ref: "event" }],
+  notes: [{ type: mongoose.Schema.Types.ObjectId, ref: "note" }],
 });
 
 module.exports = User = mongoose.model("user", userSchema);
