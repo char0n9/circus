@@ -101,7 +101,15 @@ router.post("/tokenIsValid", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+router.get("/events", auth, async (req, res) => {
+  User.find({})
+    .populate("events")
+    .exec(function (err, users) {
+      if (err) console.log(err);
+      //this will log all of the users with each of their posts
+      else console.log(users);
+    });
+});
 router.get("/", auth, async (req, res) => {
   const user = await User.findById(req.user);
   res.json({ displayName: user.displayName, id: user._id });
