@@ -1,0 +1,23 @@
+.form-style {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+.input-medium {
+  width: 65%;
+  text-align: center;
+  padding: 5px;
+  border-radius: 2px;
+  border: 1px solid gray;
+  align-self: center;
+}
+
+.reg-text {
+  text-align: center;
+}
+
+.submit-btn {
+  width: 65%;
+  height: 45px;
+  align-self: center;
+}

@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Grandstander&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap");
+
+.darken {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(./../../assets/splash.jpg);
+  background-size: cover;
+}
+
+.splash {
+  height: 100vh;
+  margin: 0 0;
+  padding: 0%;
+  overflow: hidden;
+}
+
+.signup-btn {
+  position: fixed;
+  top: 42%;
+  width: 350px;
+  /* align-self: center; */
+}
+
+.center-stuff {
+  justify-content: center;
+}
+.splash-text {
+  margin-top: 10%;
+  color: hsla(0, 0%, 100%, 0.883);
+  font-family: "Raleway", sans-serif;
+  font-size: 7rem;
+  text-shadow: 0 1px 0 black;
+}
+
+.login-btn {
+  color: #f3f4f6;
+  font-family: "Grandstander", cursive;
+  position: fixed;
+  top: 50%;
+  width: 350px;
+}
+
+.event-cards {
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.each-card {
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
