@@ -39,7 +39,7 @@ export default function Register() {
       localStorage.setItem("auth-token", loginResponse.data.token);
       localStorage.setItem("user", loginResponse.data.user.displayName);
 
-      history.push("/");
+      history.push("/events");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }

@@ -18,8 +18,9 @@ export default function NewEvent() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const newEvent = { venue, title, date };
-      const loginRes = await Axios.post(
+      const userName = localStorage.getItem("user");
+      const newEvent = { venue, title, date, name: userName };
+      const newEventRes = await Axios.post(
         "http://localhost:5000/events/new/",
         newEvent,
         { headers: { "x-auth-token": token } }

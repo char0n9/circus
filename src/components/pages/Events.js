@@ -14,6 +14,13 @@ export default function Events() {
   //   const history = useHistory();
   //   const goCreate = history.push("/events/new");
 
+  const getMyEvents = async () => {
+    const response = await axios.get("http://localhost:5000/events/myevents", {
+      headers: { "x-auth-token": token },
+    });
+    setMyEvents(response.data.events);
+  };
+
   useEffect(() => {
     const getEvents = async () => {
       const response = await axios.get("http://localhost:5000/events/", {
@@ -22,20 +29,21 @@ export default function Events() {
       setEvents(response.data.events);
     };
     getEvents();
-    const getMyEvents = async () => {
-      const response = await axios.get(
-        "http://localhost:5000/events/myevents",
-        {
-          headers: { "x-auth-token": token },
-        }
-      );
-      setMyEvents(response.data.events);
-    };
-    getMyEvents();
-  }, []);
-  const deleteEvent = (e) => {
-    console.log(e.target);
 
+    getMyEvents();
+    console.log(myEvents);
+  }, []);
+  const deleteEvent = async (eventId) => {
+    const deleteConfirm = await axios({
+      method: "delete",
+      url: "http://localhost:5000/events/delete",
+      headers: { "x-auth-token": token },
+
+      data: {
+        eventId,
+      },
+    });
+    getMyEvents();
     // async axios.delete (`http://localhost:5000/events/myevents/${e.target.value._id}`)
   };
 
@@ -54,7 +62,13 @@ event-cards"
         {events ? (
           events.map((ev) => (
             <Col sm={4}>
-              <CardComp title={ev.title} venue={ev.venue} host={ev.host} />{" "}
+              <CardComp
+                title={ev.title}
+                venue={ev.venue}
+                host={ev.host}
+                eventId={ev._id}
+                name={ev.name}
+              />{" "}
             </Col>
           ))
         ) : (
@@ -74,9 +88,11 @@ event-cards"
               <CardComp
                 deleteEvent={deleteEvent}
                 isMine
+                eventId={ev._id}
                 title={ev.title}
                 venue={ev.venue}
                 host={ev.host}
+                name={ev.name}
               />{" "}
             </Col>
           ))

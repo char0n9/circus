@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import { Navbar, Spinner } from "react-bootstrap";
 
@@ -20,7 +20,9 @@ export default function AuthOptions() {
 
   return (
     <Navbar style={{ marginBottom: "0.3em" }}>
-      <Navbar.Brand>Wild Circus</Navbar.Brand>
+      <Navbar.Brand>
+        <Link to="/">Wild Circus</Link>
+      </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
